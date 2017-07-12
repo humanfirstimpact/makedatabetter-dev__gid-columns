@@ -7,13 +7,12 @@
 <!--
 `gid-columns`
 
-The `gid-columns` element is a data component acting as a wrapper  on gid-api used for handling rest calls for list entity component.
+The `gid-columns` element is a data component acting as a wrapper  on gid-api used for handling rest calls for fetching columns against
+a particular pattern or an example value.
 
 <gid-columns api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev'
-        column = "100352" service = "synonyms" examples={{examples}}></gid-columns>
+        input-param-type = "patterns" input-param-id = "700557" columns={{columns}}></gid-columns>
         
-If `api-url` is not provided, the component will display sample output for specified entity.
-
 @demo demo/index.html
 -->
 <dom-module id="gid-columns">
@@ -71,7 +70,6 @@ If `api-url` is not provided, the component will display sample output for speci
                     }
                 },
                 columnResponseChanged: function (newvalue, oldvalue) {
-                    console.log(newvalue);
                     this.columns = [];
 
                     if (newvalue != null) {
