@@ -18,13 +18,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 </head>
 <body unresolved>
-<h1>Synonyms</h1>
+<h1>Columns</h1>
 
 <div class="horizontal-section-container">
     <template is="dom-bind" id="app">
         <gid-columns api-url='https://ql50yzu0fj.execute-api.us-east-1.amazonaws.com/dev'
-        concept = "100352" service = "synonyms" examples={{examples}}></gid-columns>
-        <template is="dom-repeat" items="[[examples]]">
+        input-param-type = "patterns" input-param-id = "700557" columns={{columns}}></gid-columns>
+        <template is="dom-repeat" items="[[columns]]">
             <div class="horizontal-section">
                 <p>{{item.label}}</p>
             </div>

@@ -21,8 +21,8 @@ If `api-url` is not provided, the component will display sample output for speci
         
 
         <gid-api auto=false
-                 http-method="GET" api-url={{serviceUrl}} response='{{serviceResponse}}'
-                 api-timeout={{serviceTimeout}} api-params={{serviceParams}}></gid-api>
+                 http-method="GET" api-url={{columnUrl}} response='{{columnResponse}}'
+                 api-timeout={{columnTimeout}} api-params={{columnParams}}></gid-api>
 
     </template>
     <script>
@@ -31,63 +31,60 @@ If `api-url` is not provided, the component will display sample output for speci
             Polymer({
                 is: 'gid-columns',
                 properties: {
-                    service: {
+                    inputParamType: {
                         type: String,
                         notify: true,
-                        observer: 'serviceModified'
+                        observer: 'inputParamsModified'
                     },
                     apiUrl: {
                         type: String,
                         notify: true,
                         value: ''
                     },
-                    serviceUrl: {
+                    columnUrl: {
                         type: String,
                         notify: true
                     },
-                    serviceTimeout: {
+                    columnTimeout: {
                         type: Number,
                         notify: true,
                         value: 0
                     },
-                    serviceResponse: {
+                    columnResponse: {
                         type: Object,
                         notify: true,
-                        observer: 'serviceResponseChanged'
+                        observer: 'columnResponseChanged'
                     },
-                    serviceParams: {
+                    columnParams: {
                         type: String,
                         notify: true
                     },
-                    examples: {
+                    columns: {
                         type: Array,
                         value: [],
                         notify: true
                     },
-                    concept: {
-                        type: String,
-                        notify: true,
-                        value: ''
+                    inputParamId: {
+                    	 type: String,
+                         notify: true,
+                         value: ''
                     }
                 },
-                serviceResponseChanged: function (newvalue, oldvalue) {
+                columnResponseChanged: function (newvalue, oldvalue) {
                     console.log(newvalue);
-                    this.examples = [];
+                    this.columns = [];
 
                     if (newvalue != null) {
                         this.async(function () {
-                            this.examples = newvalue[this.service];
+                            this.columns = newvalue.columns;
                         }, 500);
                     }
 
                 },
-                serviceModified: function () {
-                    if (this.service) {
-                        this.serviceUrl = this.apiUrl + '/concepts/' + this.column  +'/' + this.service ;
-                        this.serviceParams= JSON.stringify({
-          	        	  "limit":10, 
-          	        	  "offset":0});
-                    }
+                inputParamsModified: function () {
+                    if (this.inputParamType) {
+                        this.columnUrl = this.apiUrl + '/' + this.inputParamType  + '/' + this.inputParamId + '/columns';
+                	}
                 }
             });
         })();
